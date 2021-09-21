@@ -15,7 +15,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        return view('VistasFerre.crear');
     }
 
     /**
@@ -36,7 +36,16 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datosProductos = request()->except('_token');
+
+        // return  response()->json($datosProductos);
+        if($request->hasFile('foto')){
+            $datosProductos['foto'] = $request->file('foto')->store('uploads','public');
+            producto::insert($datosProductos);
+            return redirect('producto')->with('Mensaje','Registro agregado');
+        }else{
+            return redirect('producto')->with('Mensaje_err','No contiene imagen');
+        }
     }
 
     /**
@@ -45,9 +54,10 @@ class ProductoController extends Controller
      * @param  \App\Models\producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function show(producto $producto)
+    public function show()
     {
-        //
+        $datos['productos'] = producto::all();
+        return view('VistasFerre.ver',$datos);
     }
 
     /**
