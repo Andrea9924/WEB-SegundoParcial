@@ -9,7 +9,7 @@
     <div class="row justify-content-center">
         <div  >
             <div class="card">
-                <div class="card-header">{{ __('Crear') }}</div>
+                <div class="card-header">{{ __('Ver') }}</div>
 
                 <div class="card-body"> 
                 <table >
